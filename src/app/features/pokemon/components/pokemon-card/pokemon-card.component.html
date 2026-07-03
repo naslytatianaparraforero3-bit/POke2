@@ -1,0 +1,36 @@
+<div class="pokemon-card">
+  <div class="card-image">
+    <img [src]="pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default" 
+         [alt]="pokemon.name">
+  </div>
+  
+  <div class="card-content">
+    <h3 class="pokemon-name">{{ pokemon.name | titlecase }}</h3>
+    <span class="pokemon-id">#{{ pokemon.id.toString().padStart(3, '0') }}</span>
+    
+    <div class="pokemon-types">
+      <span *ngFor="let type of pokemon.types" class="type-badge">
+        {{ type.type.name }}
+      </span>
+    </div>
+    
+    <div class="pokemon-stats">
+      <div class="stat">
+        <span class="stat-label">Altura</span>
+        <span class="stat-value">{{ pokemon.height / 10 }} m</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Peso</span>
+        <span class="stat-value">{{ pokemon.weight / 10 }} kg</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">EXP Base</span>
+        <span class="stat-value">{{ pokemon.base_experience }}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Ataque</span>
+        <span class="stat-value">{{ getStatValue('attack') }}</span>
+      </div>
+    </div>
+  </div>
+</div>
