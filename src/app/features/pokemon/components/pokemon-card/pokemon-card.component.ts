@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Pokemon, PokemonStat } from '../../model/pokemon.model';
-
 @Component({
   selector: 'app-pokemon-card',
   standalone: false,
