@@ -1,0 +1,72 @@
+.pokemon-list-container {
+  padding: 1rem;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  background-color: #ffebee;
+  border: 1px solid #cc0000;
+  color: #cc0000;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+// lovee
+  button {
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #8b0000;
+    }
+  }
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  button {
+    background-color: #cc0000;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background-color: #8b0000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  } // lemon 
+
+  span {
+    color: #333;
+    font-weight: bold;
+  }
+}

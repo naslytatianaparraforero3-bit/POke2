@@ -1,0 +1,32 @@
+<div class="pokemon-list-container">
+  
+  <div *ngIf="loading" class="loading-state">
+    <p>Cargando Pokémon...</p>
+  </div>
+
+  <div *ngIf="error && !loading" class="error-state">
+    <p>{{ error }}</p>
+    <button (click)="loadPokemons()">Reintentar</button>
+  </div>
+
+  <div *ngIf="!loading && !error" class="pokemon-grid">
+    <app-pokemon-card 
+      *ngFor="let pokemon of pokemons" 
+      [pokemon]="pokemon">
+    </app-pokemon-card>
+  </div>
+
+  <div *ngIf="!loading && !error" class="pagination">
+    <button 
+      (click)="previousPage()" 
+      [disabled]="offset === 0">
+      ← Anterior
+    </button>
+    <span>Página {{ (offset / limit) + 1 }}</span>
+    <button 
+      (click)="nextPage()">
+      Siguiente →
+    </button>
+  </div>
+
+</div>
