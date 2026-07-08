@@ -8,8 +8,12 @@
     <h3 class="pokemon-name">{{ pokemon.name | titlecase }}</h3>
     <span class="pokemon-id">#{{ pokemon.id.toString().padStart(3, '0') }}</span>
     
+    
     <div class="pokemon-types">
-      <span *ngFor="let type of pokemon.types" class="type-badge">
+      <span 
+        *ngFor="let type of pokemon.types" 
+        class="type-badge"
+        (click)="onTypeClick(type.type.url)">
         {{ type.type.name }}
       </span>
     </div>

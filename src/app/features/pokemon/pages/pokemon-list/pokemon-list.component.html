@@ -1,5 +1,12 @@
 <div class="pokemon-list-container">
   
+  <div class="search-bar">
+    <input 
+      type="text" 
+      [formControl]="searchControl"
+      placeholder="Buscar Pokémon por nombre...">
+  </div>
+
   <div *ngIf="loading" class="loading-state">
     <p>Cargando Pokémon...</p>
   </div>
@@ -12,11 +19,12 @@
   <div *ngIf="!loading && !error" class="pokemon-grid">
     <app-pokemon-card 
       *ngFor="let pokemon of pokemons" 
-      [pokemon]="pokemon">
+      [pokemon]="pokemon"
+      (typeClick)="showTypeDetailModal($event)">  
     </app-pokemon-card>
   </div>
 
-  <div *ngIf="!loading && !error" class="pagination">
+  <div *ngIf="!loading && !error && !isSearchMode" class="pagination">
     <button 
       (click)="previousPage()" 
       [disabled]="offset === 0">
@@ -27,6 +35,46 @@
       (click)="nextPage()">
       Siguiente →
     </button>
+  </div>
+
+  <div *ngIf="showTypeDetail" class="type-detail-overlay" (click)="closeTypeDetail()">
+    <div class="type-detail-modal" (click)="$event.stopPropagation()">
+      
+      <div *ngIf="typeLoading" class="loading-state">
+        <p>Cargando detalle del tipo...</p>
+      </div>
+
+      <div *ngIf="!typeLoading && selectedType">
+        <h2>{{ selectedType.name }}</h2>
+        
+        <div class="damage-relations">
+          <h3>Relaciones de daño</h3>
+          
+          <div *ngIf="selectedType.damage_relations.double_damage_from.length">
+            <h4>Doble daño recibido de:</h4>
+            <span *ngFor="let type of selectedType.damage_relations.double_damage_from" class="type-badge">
+              {{ type.name }}
+            </span>
+          </div>
+
+          <div *ngIf="selectedType.damage_relations.half_damage_from.length">
+            <h4>Medio daño recibido de:</h4>
+            <span *ngFor="let type of selectedType.damage_relations.half_damage_from" class="type-badge">
+              {{ type.name }}
+            </span>
+          </div>
+
+          <div *ngIf="selectedType.damage_relations.no_damage_from.length">
+            <h4>Sin daño recibido de:</h4>
+            <span *ngFor="let type of selectedType.damage_relations.no_damage_from" class="type-badge">
+              {{ type.name }}
+            </span>
+          </div>
+        </div>
+
+        <button class="close-btn" (click)="closeTypeDetail()">Cerrar</button>
+      </div>
+    </div>
   </div>
 
 </div>

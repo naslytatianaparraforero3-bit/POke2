@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core'; 
 import { Pokemon, PokemonStat } from '../../model/pokemon.model';
 
 @Component({
@@ -10,6 +10,8 @@ import { Pokemon, PokemonStat } from '../../model/pokemon.model';
 export class PokemonCardComponent {
   @Input() pokemon!: Pokemon;
 
+  @Output() typeClick = new EventEmitter<string>();
+
   getMainType(): string {
     return this.pokemon.types[0]?.type.name || 'normal';
   }
@@ -18,6 +20,8 @@ export class PokemonCardComponent {
     const stat = this.pokemon.stats.find((s: PokemonStat) => s.stat.name === statName);
     return stat ? stat.base_stat : 0;
   }
-}
 
-// lop
+  onTypeClick(typeUrl: string): void {
+    this.typeClick.emit(typeUrl);
+  }
+}
